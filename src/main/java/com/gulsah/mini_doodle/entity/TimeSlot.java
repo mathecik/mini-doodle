@@ -73,4 +73,7 @@ public class TimeSlot {
         this.endTime = startTime.plus(Duration.ofMinutes(durationMinutes));
     }
 
+    public long getDurationMinutes() {
+        return Duration.between(startTime, endTime).toMinutes();
+    }
 }

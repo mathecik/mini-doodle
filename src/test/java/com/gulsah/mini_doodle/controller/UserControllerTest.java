@@ -3,6 +3,8 @@ package com.gulsah.mini_doodle.controller;
 import com.gulsah.mini_doodle.TestcontainersConfiguration;
 import com.gulsah.mini_doodle.entity.User;
 import com.gulsah.mini_doodle.repository.CalendarRepository;
+import com.gulsah.mini_doodle.repository.MeetingRepository;
+import com.gulsah.mini_doodle.repository.TimeSlotRepository;
 import com.gulsah.mini_doodle.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,8 +35,16 @@ class UserControllerTest {
     @Autowired
     private CalendarRepository calendarRepository;
 
+    @Autowired
+    private MeetingRepository meetingRepository;
+
+    @Autowired
+    private TimeSlotRepository timeSlotRepository;
+
     @BeforeEach
     void cleanUp() {
+        meetingRepository.deleteAll();
+        timeSlotRepository.deleteAll();
         calendarRepository.deleteAll();
         userRepository.deleteAll();
     }
