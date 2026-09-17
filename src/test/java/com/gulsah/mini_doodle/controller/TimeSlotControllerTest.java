@@ -141,4 +141,21 @@ class TimeSlotControllerTest {
     private TimeSlot saveSlot(String startTime) {
         return timeSlotRepository.save(new TimeSlot(Instant.parse(startTime), 30, calendar));
     }
+
+    @Test
+    void returnsAvailabilitySummary() throws Exception {
+        saveSlot("2026-09-21T10:00:00Z");
+        TimeSlot busySlot = saveSlot("2026-09-21T11:00:00Z");
+        busySlot.markBusy();
+        timeSlotRepository.save(busySlot);
+
+        mockMvc.perform(get("/api/v1/users/{userId}/availability", user.getId())
+                        .param("from", "2026-09-21T00:00:00Z")
+                        .param("to", "2026-09-22T00:00:00Z"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.freeMinutes").value(30))
+                .andExpect(jsonPath("$.busyMinutes").value(30))
+                .andExpect(jsonPath("$.free.length()").value(1))
+                .andExpect(jsonPath("$.busy.length()").value(1));
+    }
 }

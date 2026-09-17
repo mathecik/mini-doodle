@@ -1,5 +1,6 @@
 package com.gulsah.mini_doodle.service;
 
+import com.gulsah.mini_doodle.dto.AvailabilityResponse;
 import com.gulsah.mini_doodle.entity.Calendar;
 import com.gulsah.mini_doodle.entity.SlotStatus;
 import com.gulsah.mini_doodle.entity.TimeSlot;
