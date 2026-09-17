@@ -64,7 +64,7 @@ curl -X POST localhost:8080/api/v1/users \
   -H "Content-Type: application/json" \
   -d '{"username": "minion", "email": "minion@example.com"}'
 
-# create the second user (optional : to test meeting schedule with participants)
+# create the second user (needed for the participant in the meeting below)
 curl -X POST localhost:8080/api/v1/users \
   -H "Content-Type: application/json" \
   -d '{"username": "totoro", "email": "totoro@example.com"}'
@@ -77,7 +77,7 @@ curl -X POST localhost:8080/api/v1/users/1/slots \
 # schedule a meeting on that slot
 curl -X POST localhost:8080/api/v1/users/1/meetings \
   -H "Content-Type: application/json" \
-  -d '{"slotId": 1, "title": "Planning", "participantIds": [2]}'
+  -d '{"slotId": 1, "title": "Planning", "description": "Sprint planning", "participantIds": [2]}'
 
 # see the availability for that day
 curl "localhost:8080/api/v1/users/1/availability?from=2026-09-21T00:00:00Z&to=2026-09-22T00:00:00Z"
